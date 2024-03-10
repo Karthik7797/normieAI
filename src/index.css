@@ -18,7 +18,7 @@ html {
   filter: invert(1) hue-rotate(180deg);
   /* Define your dark mode styles */
 }
-.dark-mode img{
+.dark-mode .nav_right img{
   filter: invert(1) hue-rotate(180deg);
   transition: filter 1ms;
 }
