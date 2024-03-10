@@ -1,14 +1,30 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './main.css'
 import { assets } from '../../assets/assets'
 import { Context } from '../../context/Context'
 const Main = () => {
+    const [isDarkMode, setIsDarkMode] = useState(false);
+    useEffect(() => {
+        document.documentElement.className = isDarkMode ? 'dark-mode' : 'light-mode';
+      }, [isDarkMode]);
+    
+      const toggleDarkMode = () => {
+        setIsDarkMode(!isDarkMode);
+      };
     const{onSent,recentPrompt,showResult,loading,resultData,setInput,input} = useContext(Context)
   return (
     <div className='main'>
         <div className="nav">
             <p>Normie</p>
+            <div className='nav_right'>
+            <label className="ui-switch">
+      <input type="checkbox" onChange={toggleDarkMode} checked={isDarkMode} />
+      <div className="slider">
+        <div className="circle"></div>
+      </div>
+    </label>
             <img src={assets.user_icon} alt="" />
+            </div>
         </div>
 
         <div className="main-container">
@@ -63,7 +79,7 @@ const Main = () => {
                     <div>
                         <img src={assets.gallery_icon} alt="" />
                         <img src={assets.mic_icon} alt="" />
-                        <img onClick={()=>onSent()} src={assets.send_icon} alt="" />
+                        {input?<img onClick={()=>onSent()} src={assets.send_icon} alt="" />:null}
                     </div>
                 </div>
                 <p className='bottom-info'>
